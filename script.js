@@ -4,6 +4,15 @@
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
 
+function randomInt(min, max){
+  return Math.floor(Math.random()*(max - min) + min)
+
+}
+
+function getRandomItem(list) {
+  return list[randomInt(0, list.length -1)]
+}
+
 function genreatePassword() {
 
 
@@ -32,7 +41,7 @@ var lowercaseList = ["a", "b", "c","d","e","f","g", "h", "i",
 "x", "y","z"]
 var uppercaseList = []
 
-var optionsCart = [numberList]
+var optionsCart = []
 
 for (var i = 0; i < lowercaseList.length; i++){
   uppercaseList[i] = lowercaseList[i].toUpperCase()
@@ -50,6 +59,14 @@ if (userWantsLowercase){
 }
 if (userWantsUppercase){
   optionsCart.push(uppercaseList)
+}
+
+var generatePassword = ""
+
+for (var i = 0; i < passwordLength; i++){
+  var randomList = getRandomItem(optionsCart)
+  var randomChar = getRandomItem(randomList)
+  console.log(randomChar)
 }
 
 }
