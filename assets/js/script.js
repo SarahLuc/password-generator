@@ -5,15 +5,19 @@
 var generateBtn = document.querySelector("#generate");
 
 function randomInt(min, max){
-  return Math.floor(Math.random()*(max - min) + min)
-
+  if (!max) {
+    max = min
+    min - 0
+  }
+  var rand =  Math.random()
+return Math.floor(min*(1-rand)+rand*max)
 }
 
 function getRandomItem(list) {
-  return list[randomInt(0, list.length -1)]
+  return list[randomInt(list.length)]
 }
 
-function genreatePassword() {
+function generatePassword() {
 
 
 var userInput = window.prompt('How long do you want your password to be?')
@@ -31,7 +35,7 @@ if (passwordLength < 8 || passwordLength > 128){
 
 var userWantsNumbers = window.confirm('would you like to include numbers in  your password?')
 var userWantsSymbols = window.confirm('would you like to include symbols in your password?')
-var userwantsUppercase = window.confirm('would you like to include uppercase letters in your password?')
+var userWantsUppercase = window.confirm('would you like to include uppercase letters in your password?')
 var userWantsLowercase = window.confirm('would you like to include lowercase letters in your password?')
 
 var numberList = ["0", "1","2", "3", "4", "5","6", "7", "8","9"]
@@ -60,15 +64,18 @@ if (userWantsLowercase){
 if (userWantsUppercase){
   optionsCart.push(uppercaseList)
 }
+if (optionsCart.length === 0){
+  optionsCart.push(lowercaseList)
+}
 
 var generatePassword = ""
 
 for (var i = 0; i < passwordLength; i++){
   var randomList = getRandomItem(optionsCart)
   var randomChar = getRandomItem(randomList)
-  console.log(randomChar)
+  generatePassword += randomChar
 }
-
+return generatePassword
 }
 
 // Write password to the #password input
